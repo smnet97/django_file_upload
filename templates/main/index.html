@@ -6,6 +6,16 @@
 </head>
 <body>
     <h1>Upload</h1>
+    {% for new in news %}
+        <div>
+            <img src="{{ new.photo.url }}" alt="{{ new.subject }}">
+            <h2>{{ new.subject }}</h2>
+            <p>
+                {{ new.content }}
+            </p>
+        </div>
+        <hr>
+    {% endfor %}
     <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
