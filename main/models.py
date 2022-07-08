@@ -1,6 +1,7 @@
 from django.db import models
 import os
 from datetime import datetime
+from .validations import ImageSizeValidation
 
 
 def convert_file_name(instance, filename):
@@ -12,7 +13,10 @@ def convert_file_name(instance, filename):
 class News(models.Model):
     subject = models.CharField(max_length=100)
     content = models.TextField()
-    photo = models.FileField(upload_to=convert_file_name)
+    photo = models.FileField(
+        upload_to=convert_file_name,
+        validators=[ImageSizeValidation()]
+    )
 
     def __str__(self):
         return self.subject
